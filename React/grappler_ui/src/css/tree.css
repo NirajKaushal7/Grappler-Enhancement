@@ -1,0 +1,70 @@
+/* external-styles.css */
+.leaf_node {
+  /* Set the background color, text color, margin, padding, and cursor style */
+  background-color: #b9f3f5; /* Background color for leaf folders */
+  color: #000; /* Text color for leaf folders */
+  margin: 13px; /* Remove margin for leaf folders */
+  padding: 0; /* Remove padding for leaf folders */
+  cursor: pointer; /* Change the cursor to indicate it's clickable */
+  text-align: right; /* Align text to the left for leaf folders */
+  border: none; /* Remove border for leaf folders */
+  font-size: 14px ; 
+  /* Add any other styles as needed */
+  &:hover {
+    background-color: #ff9933; /* Background color on hover */
+    color: #fff; /* Text color on hover */
+  }
+}
+.non_leaf_node {
+  /* Define your desired styles for non-leaf nodes here */
+  background-color: #7ff1f5; /* Background color for non-leaf nodes */
+  color: #333; /* Text color for non-leaf nodes */
+  padding: 5px; /* Adjust padding as needed */
+  /* border: 1px solid #ccc; Add a border for non-leaf nodes */
+  font-size: 14px; /* Adjust the font size for non-leaf nodes */
+  cursor: pointer; /* Change the cursor to indicate it's clickable */
+  /* Add any other styles as needed */
+  &:hover {
+    background-color: #D0D0D0; /* Background color on hover */
+  }
+}
+/* .div {
+  background-color: #b9f3f5;
+  padding: 0px;
+} */
+/* TreeNode Styles */
+.folder {
+  cursor: pointer;
+  display: inline-block;
+  /* margin-left: 10px; */
+  font-size: 14px; /* Adjust the font size as needed */
+}
+
+.open-folder::before {
+  content: "\25BC"; /* Unicode character for a downward-pointing triangle */
+  /* margin-right: 5px; Spacing between icon and folder name */
+}
+
+.closed-folder::before {
+  content: "\25B6"; /* Unicode character for a right-pointing triangle */
+  /* margin-right: 5px; Spacing between icon and folder name */
+}
+
+.leaf-folder {
+  cursor: pointer;
+  /* display: inline-block; */
+  margin-left : 0px ; 
+  /* Add any other styles as needed */
+}
+
+/* Adjust margin for nested levels */
+ul {
+  margin-left: 20px;
+}
+
+/* Remove list-style and padding */
+ul, li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

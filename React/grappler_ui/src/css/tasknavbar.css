@@ -1,0 +1,53 @@
+.task-navbar {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px; 
+    align-items: center; 
+  }
+  
+  .task-navbar-left {
+    display: flex;
+    gap: 5%;
+  }
+  
+  .task-navbar-right {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .button {
+    font-weight: bold;
+    font-size: 20px; 
+  }
+  
+  
+  .table-header {
+    font-weight: bold;
+  }.task-navbar {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px; 
+    align-items: center; 
+  }
+  
+  .task-navbar-left {
+    display: flex;
+    gap: 5%;
+  }
+  
+  .task-navbar-right {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .button {
+    font-weight: bold;
+    font-size: 20px; 
+  }
+  
+  
+  .table-header {
+    font-weight: bold;
+  }
