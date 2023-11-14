@@ -1,0 +1,72 @@
+/* ProjectHierarchySidebar.css */
+
+/* Style the summary element */
+.ProjectHierarchySidebar summary {
+    cursor: pointer;
+    font-weight: bold;
+    list-style: none; /* Remove default list marker */
+  }
+  
+  /* Style the details element when it's open */
+  .ProjectHierarchySidebar details[open] {
+    background-color: #b9f3f5; /* Match the background color of the sidebar */
+    border: 1px solid #0d0c0c; /* Match the border color of the sidebar */
+    margin: 5px 0;
+    padding: 5px;
+  }
+  
+  /* Remove the markers from lists */
+  .ProjectHierarchySidebar ul {
+    list-style-type: none;
+    padding-left: 20px;
+  }
+  
+  .ProjectHierarchySidebar li {
+    margin: 5px 0;
+  }
+  
+  /* Style the toggle icon */
+  .ProjectHierarchySidebar summary::before {
+    content: ''; /* Empty content to remove icon */
+    padding-right: 5px;
+  }
+  
+  /* Additional styling for nested ProjectHierarchySidebar components */
+  .ProjectHierarchySidebar {
+    max-height: 100%; /* Set a maximum height based on your design */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    /* Other styles for your sidebar */
+  }
+  
+  /* Transparent button style for nested buttons */
+  .ProjectHierarchySidebar .button {
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: none;
+    color: #151313;
+    cursor: pointer;
+  }
+  
+  /* Change the color when button is active (clicked) for nested buttons */
+  .ProjectHierarchySidebar .button:active {
+    background-color: whitesmoke; /* Change to your desired click color */
+    color: #23138e;
+  }
+  
+  /* Change the color when button is hovered for nested buttons */
+  .ProjectHierarchySidebar .button:hover {
+    background-color: rgb(169, 227, 241); /* Change to your desired hover color */
+    color: white;
+  }
+  .folder-name {
+    display: flex;
+    align-items: center;
+  }
+  
+  .expand-icon {
+    margin-left: 10px; /* Adjust the margin as needed */
+    font-size: 18px; /* Adjust the font size as needed */
+    cursor: pointer; /* Add a pointer cursor for the icon */
+  }

@@ -1,0 +1,5 @@
+.table td {
+    word-wrap: break-word;
+    max-width: 100px; /* Adjust the maximum width as needed */
+  }
+  

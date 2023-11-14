@@ -1,0 +1,35 @@
+
+.logo-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Make it a circle */
+    overflow: hidden; /* Hide overflow to ensure it's a circle */
+    
+  }
+  
+  /* Style for the logo image */
+  .logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Style for the "Add Logo" option */
+  .add-logo-option {
+    color: rgb(57, 10, 10) !important;
+    font-size: 24px !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s; /* Add a smooth transition effect */
+    color: white; /* Color for the plus icon */
+    font-size: 24px; /* Adjust the size as needed */
+  }
+  

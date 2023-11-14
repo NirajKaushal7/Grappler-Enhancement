@@ -1,0 +1,52 @@
+.sidebar {
+  width: 20%;
+  position: fixed;
+  top: 80px; /* Adjust the top position based on your design */
+  left: 0;
+  background-color: #b9f3f5;
+  color: #0d0c0c;
+  padding-top: 0px;
+  padding-left: 10px;
+  overflow-y: auto; /* Add vertical scrollbar if the content exceeds the height */
+  height: calc(100vh - 80px); /* Calculate the height relative to the viewport height minus the top position */
+}
+
+/* Center the content in the sidebar */
+.sidebar-center {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 22px;
+  margin-top: 20px; /* Adjust the margin as needed */
+}
+
+/* Transparent button style */
+.button {
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px;
+  background-color: transparent;
+  border: none;
+  color: #151313;
+  cursor: pointer;
+}
+
+/* Change the color when button is active (clicked) */
+.button:active {
+  background-color: whitesmoke; /* Change to your desired click color */
+  color: #23138e;
+}
+
+/* Change the color when button is hovered */
+.button:hover {
+  background-color: #ffffff; /* Change to your desired hover color */
+  color: #23138e;
+}
+
+/* Add styles for the tree container */
+.tree-container {
+  margin-top: 20px; /* Adjust the margin as needed */
+  width: 100%;
+  overflow: auto; /* Add scroll if needed */
+}
