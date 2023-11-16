@@ -31,7 +31,7 @@ function Dashboard() {
             // console.log("Response from getAllWorkspaces:", response.data);
             toast.success("All tasks retrieved Successfully.");
           } catch (error) {
-            toast.error(error.response.data.message);
+            toast.error(error.response?.data?.message);
           }
         };
   

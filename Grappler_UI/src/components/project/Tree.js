@@ -328,52 +328,51 @@ async function  addTask()
  
   return (
     <div className="div">
-      <span
-        className={`folder ${
-          hasSubfolders
-            ? isOpen
-              ? "open-folder"
-              : "closed-folder"
-            : "leaf-folder"
-        }`}
-        onClick={toggleOpen}
-      ></span>
-      
-      <span className="non_leaf_node" onClick={handleSpanClick}>
-          {folder.name}
-        </span>
-      
-      {/* {  
-      console.log("folder.stask= "+!folder.tasks+ ",is()=>"+ hasTasks)} */}
-      
-      {/* {folder.tasks && folder.tasks.length === 0  && (
-      <MoreVertIcon className="three-dots-icon" onClick={handle3DotsClick} style={{marginLeft:"30px"}} />
+ <div className="folder-container">
+  <span
+    className={`folder ${
+      hasSubfolders ? (isOpen ? "open-folder" : "closed-folder") : "leaf-folder"
+    }`}
+    onClick={toggleOpen}
+  ></span>
+  
+  <div className="name-container">
+    <span className="non_leaf_node" onClick={handleSpanClick}>
+      {folder.name}
+    </span>
+    <MoreVertIcon
+      className="three-dots-icon"
+      onClick={handle3DotsClick}
+    />
+  </div>
+
+  <Popover
+    open={open}
+    anchorEl={anchorEl}
+    onClose={handle3DotsClose}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "left",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "left",
+    }}
+  >
+    <div className="popup-content">
+      {/* {console.log("folder.tasks",folder.name , " ====>> ", folder.tasks, hasTasks)} */}
+      {(folder.tasks && folder.tasks?.length === 0 && !hasTasks) ||
+      (!folder.tasks && !hasTasks) ? (
+        <Button onClick={handleCreateFolder}>Create Folder</Button>
+      ) : (
+        <></>
       )}
-        {!folder.tasks && (!hasTasks) && (
-          )} */}
-          <MoreVertIcon className="three-dots-icon" onClick={handle3DotsClick} style={{marginLeft:"30px"}} />
-      <Popover
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handle3DotsClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-      >
-        <div className="popup-content">
-          {/* {console.log("folder.tasks",folder.name , " ====>> ", folder.tasks, hasTasks)} */}
-        {(folder.tasks && folder.tasks?.length === 0 && !hasTasks)||(!folder.tasks && (!hasTasks)) 
-        ? (<Button onClick={handleCreateFolder}>Create Folder</Button>):(<></>)}
-          <Button onClick={handleEdit}>Edit</Button>
-          <Button onClick={handleDelete}>Delete</Button>
-          <Button onClick={handleAddTask}>Add Task</Button>
-        </div>
-      </Popover>
+      <Button onClick={handleEdit}>Edit</Button>
+      <Button onClick={handleDelete}>Delete</Button>
+      <Button onClick={handleAddTask}>Add Task</Button>
+    </div>
+  </Popover>
+</div>
 
        <Modal show={isCreateModalOpen} onHide={() => {setIsCreateModalOpen(false);setFolderTypeInput("NONLEAF")}}>
         <Modal.Header closeButton>

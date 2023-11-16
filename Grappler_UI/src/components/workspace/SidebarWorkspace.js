@@ -19,7 +19,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore"; // Add this import
 import { getAllProjectOfWorkspace, addProjectApi } from "../../api/projectApi";
 import { createproject, fetchProjects } from "../../slices/projectSlice";
 import Tree from "../project/Tree";
-
+import "../../css/SidebarWorkspace.css"
 const SidebarWorkspace = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();

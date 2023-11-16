@@ -1,13 +1,14 @@
 .sidebar {
   width: 20%;
-  position: fixed;
+  /* position: fixed; */
   top: 80px; /* Adjust the top position based on your design */
   left: 0;
-  background-color: #b9f3f5;
+  /* background-color: #b9f3f5; */
   color: #0d0c0c;
-  padding-top: 0px;
-  padding-left: 10px;
+  /* padding-top: 0px;
+  padding-left: 10px; */
   overflow-y: auto; /* Add vertical scrollbar if the content exceeds the height */
+  overflow-x: auto;/* Add horizontal scrollbar if the content exceeds the height */
   height: calc(100vh - 80px); /* Calculate the height relative to the viewport height minus the top position */
 }
 
