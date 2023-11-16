@@ -40,8 +40,8 @@ const [folderNameError, setFolderNameError] = useState("");
 const [taskNameError, setTaskNameError] = useState("");
 
 const [projectName, setProjectName] = useState("");
-const [projectType, setProjectType] = useState("");
-const [projectSubType, setProjectSubType] = useState("");
+const [projectType, setProjectType] = useState("Normal");
+const [projectSubType, setProjectSubType] = useState("Normal");
 const [validationError,setValidationError] = useState("");
 const [hasTasks, setHasTasks] = useState(false);
 
@@ -312,8 +312,11 @@ async function  addTask()
       // console.log(error.response);
       toast.error(message);
     }     
-    // Refresh();
+    Refresh();
     setIsEditProjectModalOpen(false);
+    setProjectName("");
+    setProjectType("Normal");
+    setProjectSubType("Normal");
   }
   
 
