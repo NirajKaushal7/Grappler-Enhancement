@@ -117,6 +117,7 @@ const [taskName, setTaskName] = useState("");
 
 
   function handleCreateFolder() { 
+    setAnchorEl(null);
     console.log("handleCreateFolder");
     setFolderNameInput("");
     setFolderTypeInput("NONLEAF");
@@ -127,6 +128,7 @@ const [taskName, setTaskName] = useState("");
   
 function  handleAddTask()
 {
+  setAnchorEl(null);
    setIsAddTaskModalOpen(true);
    setTaskName("");    
    setTaskNameError(""); 
@@ -169,6 +171,7 @@ async function  addTask()
 
 
   function handleEdit() {
+    setAnchorEl(null);
     console.log(folder);
     if(type === "folder"){
       setFolderNameError("");
@@ -190,7 +193,7 @@ async function  addTask()
   }
 
   async function handleDelete() {
-    
+    setAnchorEl(null);
     try{
       let response ="";
    if(type === "folder"){
