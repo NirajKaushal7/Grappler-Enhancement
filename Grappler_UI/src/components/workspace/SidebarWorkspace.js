@@ -27,6 +27,7 @@ const SidebarWorkspace = () => {
   const { workspaceId } = useParams();
   const [open, setOpen] = useState(false);
   const [validationError, setValidationError] = useState("");
+  const [propProjects, setPropProjects] = useState([]);
 
   useEffect(() => {
     sessionStorage.setItem("myId", workspaceId);
@@ -46,8 +47,9 @@ const SidebarWorkspace = () => {
     fetchData();
     return () => {
       dispatch(fetchProjects([])); // Cleanup function when the component unmounts
+      setPropProjects([]); // Clear projects state
     };
-  }, [dispatch]);
+  }, [dispatch,workspaceId]);
 
   const handleModalClose = () => setShowModal(false);
 
@@ -56,10 +58,10 @@ const SidebarWorkspace = () => {
       const projectName = document.getElementById("name").value;
       const subType = document.getElementById("subtype").value;
       const type = document.getElementById("type").value;
-      console.log("projectName", projectName);
-      console.log("subType", subType);
-      console.log("subType", type);
-      console.log("adding project");
+      // console.log("projectName", projectName);
+      // console.log("subType", subType);
+      // console.log("subType", type);
+      // console.log("adding project");
       const formData = {
         name: projectName,
         type:type,
@@ -80,6 +82,7 @@ const SidebarWorkspace = () => {
       toast.success("Project created Successfully!", {
         position: "top-center",
       });
+      setPropProjects((prevProjects) => [...prevProjects, response.data]);
       handleModalClose();
     } catch (error) {
       if (error.response) {
@@ -204,7 +207,7 @@ const SidebarWorkspace = () => {
             </Collapse> */}
 
             <Collapse in={open} timeout="auto" unmountOnExit>
-              <Tree workspaceId={workspaceId} />
+            <Tree workspaceId={workspaceId} propProjects={propProjects} />
             </Collapse>
 
             <ListItemButton onClick={() => {setShowModal(true);setValidationError("")}}>

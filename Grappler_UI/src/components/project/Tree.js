@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./../../css/tree.css"; // Import your custom CSS file
 
 import { Link, useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ import {
   createFolder,
   createSubFolder,
   updateFolder,
-  deleteFolder } from "../../api/FolderApi";
+  deleteFolder,getCompanyType } from "../../api/FolderApi";
 import { toast } from 'react-toastify';
 import { createTaskUnderFolder, createTaskUnderProject, getAllTasksOfFolder, getAllTasksOfProject } from "../../api/TaskApi";
 import queryString from 'query-string';
@@ -46,6 +46,7 @@ const [validationError,setValidationError] = useState("");
 const [hasTasks, setHasTasks] = useState(false);
 
 const [taskName, setTaskName] = useState("");
+const companyTypeHierarchical = useRef(false);
 
   const toggleOpen = () => {
     if (hasSubfolders) {
@@ -90,17 +91,22 @@ const [taskName, setTaskName] = useState("");
     checkFolderTasks();
   }, [folder]);
 
-  // const handleFolderClick = () => {
-  //   const serializedData = serializeData();
-  //   navigate(`/workspaces/${workspaceId}/dashboard?data=${serializedData}`);
-  // };
-  
-  // const handleProjectClick = () => {
-  //   console.log("project click");
-  //   const serializedData = serializeData();
-  //   navigate(`/workspaces/${workspaceId}/dashboard?data=${serializedData}`);
-  // };
-
+  const checkCompanyType = async () => {
+    try {
+      const response = await getCompanyType(folder.id);
+      // console.log(response.data);
+      companyTypeHierarchical.current = Boolean(response.data);
+      // console.log(companyTypeHierarchical.current);
+    } catch (error) {
+      companyTypeHierarchical.current = false;
+    }
+  }
+  if(type === "project")
+  {
+    checkCompanyType();
+  } else {
+    companyTypeHierarchical.current= false;
+  }
   const handleNonLeafFolderClick = () => {
     // Handle non-leaf folder click here
   };
@@ -167,6 +173,7 @@ async function  addTask()
   Refresh();
   setIsAddTaskModalOpen(false);
   setTaskNameError(""); 
+  handleSpanClick();
 }
 
 
@@ -206,6 +213,7 @@ async function  addTask()
     response = await deleteProjectApi(workspaceId,project.id);
     dispatch(deleteProject(project.id));
     toast.success("Project Deleted Successfully");
+    Refresh();
    }
   }
   catch(error){
@@ -367,8 +375,8 @@ async function  addTask()
   >
     <div className="popup-content">
       {/* {console.log("folder.tasks",folder.name , " ====>> ", folder.tasks, hasTasks)} */}
-      {(folder.tasks && folder.tasks?.length === 0 && !hasTasks) ||
-      (!folder.tasks && !hasTasks) ? (
+      {(!folder.tasks && !hasTasks) || (folder.tasks && folder.tasks?.length === 0 && !hasTasks && companyTypeHierarchical.current) 
+       ? (
         <Button onClick={handleCreateFolder}>Create Folder</Button>
       ) : (
         <></>
@@ -578,7 +586,7 @@ async function  addTask()
   );
 }
 
-function Tree({ workspaceId }) {
+function Tree({ workspaceId,propProjects }) {
   const dispatch = useDispatch();
   const [tasksUpdated, setTasksUpdated] = useState(false);
   const [count, setCount] = useState(0);
@@ -594,7 +602,7 @@ function Tree({ workspaceId }) {
       }
     };
     fetchData();
-  }, [workspaceId,tasksUpdated]);
+  }, [workspaceId,tasksUpdated,propProjects]);
 
   const { projects } = useSelector((state) => state.projectList);
   const data = projects;

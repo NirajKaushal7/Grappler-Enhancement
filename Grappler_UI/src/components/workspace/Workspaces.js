@@ -18,15 +18,19 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
-
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
 function Workspaces() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
+  const [deleteDialogue, setDeleteDialogue] = useState(false);
   const [name, setName] = useState("");
   const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
   const [workSpaceObject, setWorkSpaceObject] = useState("");
+  const [workspaceId, setWorkspaceId] = useState(null);
 
   const { workspaces } = useSelector((state) => state.workspaceList);
   const queryParams = new URLSearchParams(window.location.search);
@@ -58,6 +62,9 @@ function Workspaces() {
   function Updatefunction() {
     setShowModal2(true);
   }
+  const handleClose = () => {
+    setDeleteDialogue(false);
+  };
 
   function handleOpenWorkspace(workspaceId) {
     console.log("handleOpenWorkspace ", workspaceId);
@@ -102,12 +109,12 @@ function Workspaces() {
     }
   }
 
-  async function handleDelete(workspaceId, companyId) {
-    if (workspaceId) {
-      const confirmed = window.confirm(
-        "Are you sure you want to delete this workspace?"
-      );
-      if (confirmed) {
+  async function handleDelete( companyId,workspaceId) {
+    // if (workspaceId) {
+    //   const confirmed = window.confirm(
+    //     "Are you sure you want to delete this workspace?"
+    //   );
+      if (workspaceId !== null) {
         console.log("Deleting Workspace ID:", workspaceId);
         try {
           const response = await deleteWorkspaceApi(workspaceId, companyId);
@@ -116,6 +123,7 @@ function Workspaces() {
           toast.success("Workspace deleted Successfully!", {
             position: "top-center",
           });
+          setDeleteDialogue(false);
           navigate(`/workspace?id=${companyId}`);
         } catch (error) {
           if (error.response) {
@@ -125,8 +133,9 @@ function Workspaces() {
             });
           }
         }
+      
       }
-    }
+    // }
   }
 
   const handleModalClose = () => setShowModal(false);
@@ -253,7 +262,11 @@ function Workspaces() {
                     </td>
                     <td>
                       <button
-                        onClick={() => handleDelete(workspace.id, companyId)}
+                        // onClick={() => handleDelete(workspace.id, companyId)}
+                        onClick={()=>{
+                        setWorkspaceId(workspace.id);
+                        setDeleteDialogue(true); 
+                        }}
                         className="btn btn-danger"
                       >
                         Delete
@@ -285,6 +298,26 @@ function Workspaces() {
             Go Back{" "}
           </button>
         </center>
+        <Dialog
+          open={deleteDialogue}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>Do you want to Delete this Workspace</DialogContent>
+          <DialogActions>
+            <Button onClick={()=>handleDelete(companyId,workspaceId)}>Delete</Button>
+            <Button
+              onClick={() => {
+                setDeleteDialogue(false);
+              }}
+              autoFocus
+            >
+              cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
+
       </div>
       {addWorkspaceModal}
       {updateWorkspaceModal}

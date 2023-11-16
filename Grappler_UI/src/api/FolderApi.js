@@ -21,6 +21,15 @@ export async function getFolder(folderId) {
   }
 }
 
+export async function getCompanyType(folderId) {
+  try {
+    const response = await axios.get(`${baseUrl}/${folderId}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 // Function to create a folder by project ID
 export async function createFolder(projectId, folderData) {
   try {
