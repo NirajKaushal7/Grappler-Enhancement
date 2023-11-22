@@ -22,6 +22,7 @@ import {
 import { toast } from 'react-toastify';
 import { createTaskUnderFolder, createTaskUnderProject, getAllTasksOfFolder, getAllTasksOfProject } from "../../api/TaskApi";
 import queryString from 'query-string';
+import { Dialog, DialogActions, DialogContent } from "@mui/material";
 
 function TreeNode({ folder, subFolders, workspaceId,type, onTaskAdded }) {
   const navigate = useNavigate();
@@ -47,6 +48,7 @@ const [hasTasks, setHasTasks] = useState(false);
 
 const [taskName, setTaskName] = useState("");
 const companyTypeHierarchical = useRef(false);
+const [deleteDialogue, setDeleteDialogue] = useState(false);
 
   const toggleOpen = () => {
     if (hasSubfolders) {
@@ -201,6 +203,8 @@ async function  addTask()
 
   async function handleDelete() {
     setAnchorEl(null);
+
+
     try{
       let response ="";
    if(type === "folder"){
@@ -382,7 +386,11 @@ async function  addTask()
         <></>
       )}
       <Button onClick={handleEdit}>Edit</Button>
-      <Button onClick={handleDelete}>Delete</Button>
+      {/* <Button onClick={handleDelete}>Delete</Button> */}
+      <Button onClick={()=>{
+                        setDeleteDialogue(true);
+                        setAnchorEl(null); 
+                        }}>Delete</Button>
       <Button onClick={handleAddTask}>Add Task</Button>
     </div>
   </Popover>
@@ -582,6 +590,28 @@ async function  addTask()
           ))}
         </ul>
       )}
+
+          <Dialog
+          open={deleteDialogue}
+          onClose={() => {
+            setDeleteDialogue(false);
+          }}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>Are you confirm to Delete this</DialogContent>
+          <DialogActions>
+            <Button onClick={()=>handleDelete()}>Delete</Button>
+            <Button
+              onClick={() => {
+                setDeleteDialogue(false);
+              }}
+              autoFocus
+            >
+              cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
     </div>
   );
 }
